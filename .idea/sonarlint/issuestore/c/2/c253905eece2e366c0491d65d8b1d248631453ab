@@ -1,0 +1,16 @@
+
+b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(…ÆÇË8 …Ëşª1
+b	java:S112*"FDefine and throw a dedicated exception instead of using a generic one.(…ÆÇË8¡…Ëşª1
+L
+java:S37407"/Provide the parametrized type for this generic.(¬Ñ¨‰8¢…Ëşª1
+Q
+java:S3740I"/Provide the parametrized type for this generic.(ªÔÔÊşÿÿÿÿ8¢…Ëşª1
+{	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Á’–Ôúÿÿÿÿ8¤…Ëşª1
+D
+java:S1659""Declare "tail" on a separate line.(­à—îøÿÿÿÿ8»…Ëşª1
+j	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íËº8¿…Ëşª1
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Üêşøşÿÿÿÿ8Ã…Ëşª1
+o	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÄÒØîşÿÿÿÿ8Ç…Ëşª1
+j	java:S100("NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(´ê®†8É…Ëşª1
+j	java:S1007"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(¬Ñ¨‰8Í…Ëşª1
+o	java:S100I"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ªÔÔÊşÿÿÿÿ8Ğ…Ëşª1
