@@ -1,9 +1,0 @@
-
-b	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(§±åô8€–Ñ§«1
-g	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(“ÜÏ­ûÿÿÿÿ8‚–Ñ§«1
-g	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(“ÜÏ­ûÿÿÿÿ8‚–Ñ§«1
-Q
-java:S3740"/Provide the parametrized type for this generic.(¾Ÿ—­úÿÿÿÿ8žüÑ­«1
-v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ç²·›8Š–Ñ§«1
-M
-java:S1905"+Remove this unnecessary cast to "Object[]".(º¤¹©þÿÿÿÿ8ªüÑ­«1
