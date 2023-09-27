@@ -10,11 +10,19 @@ public class Review {
     private Chaza chaza;
     private User autor;
 
-    public Review(Calendar date, float score, Chaza chaza, User autor) {
-        this.date = date;
+    public Review(float score, Chaza chaza, User autor) {
+        this.date = Calendar.getInstance();
         this.score = score;
         this.chaza = chaza;
         this.autor = autor;
+    }
+    public Review(float score, Chaza chaza, User autor, String description, String title){
+        this.date = Calendar.getInstance();
+        this.score = score;
+        this.chaza = chaza;
+        this.autor = autor;
+        this.description = description;
+        this.title = title;
     }
 
     public Calendar getDate() {

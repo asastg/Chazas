@@ -1,7 +1,7 @@
 package structures.queues;
 import structures.List;
 
-public class ArrayQueueDynamic<T> extends List {
+public class ArrayQueueDynamic<T> extends List  {
     private static final int DEFAULT_SIZE = 3;
     private int front;
     private int rear;
@@ -41,12 +41,12 @@ public class ArrayQueueDynamic<T> extends List {
         int newSize = size * 2; // Duplicar el tamaño de la cola
         T[] newQueue = (T[]) new Object[newSize];
         for (int i = 0; i < size; i++) {
-            newQueue[i] = queue[(front + i) % size];
+            newQueue[i] = this.queue[(front + i) % size];
         }
-        front = 0;
-        rear = size;
-        size = newSize;
-        queue = newQueue;
+        this.front = 0;
+        this.rear = size;
+        this.size = newSize;
+        this.queue = newQueue;
     }
 
     public T peek() {
