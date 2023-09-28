@@ -2,17 +2,31 @@ package entities;
 
 import structures.stacks.ArrayStack;
 
+
+
 public class Chaza {
     private String name;
     private String location;
     private String foodType;
-    private ArrayStack<Review>[] reviews;
+    private ArrayStack<Review> reviews;
     private float averageScore;
+    private Admin admin;
 
-    public Chaza(String name, String location, String foodType) {
+    public Chaza(String name, String location, String foodType, Admin admin) {
         this.name = name;
         this.location = location;
         this.foodType = foodType;
+        this.admin = admin;
+        this.reviews = new ArrayStack<Review>(5);
+        this.averageScore = 0;
+    }
+    
+    public void setAdmin(Admin admin){
+        this.admin = admin;
+    }
+
+    public Admin getAdmin(){
+        return admin;
     }
 
     public String getName() {
@@ -39,11 +53,11 @@ public class Chaza {
         this.foodType = foodType;
     }
 
-    public ArrayStack<Review>[] getReviews() {
+    public ArrayStack<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(ArrayStack<Review>[] reviews) {
+    public void setReviews(ArrayStack<Review> reviews) {
         this.reviews = reviews;
     }
 
@@ -54,4 +68,23 @@ public class Chaza {
     public void setAverageScore(float averageScore) {
         this.averageScore = averageScore;
     }
+
+    public void addReview(User user){
+        String description;
+        String title;
+        float score=0;
+        //Lectura del mockup data
+
+
+        user.addReview(description, title, score, this);
+        this.reviews.push(new Review(score, this, user, description, title));
+        this.udapteScore(score);
+        
+    }
+    
+    public void udapteScore(float score){
+        this.averageScore = (this.averageScore+ score)/this.reviews.getCount();
+    }
+
+    
 }

@@ -9,6 +9,7 @@ public class ArrayStack<T> extends List {
     public ArrayStack() {
         this(fixed);
     }
+
     public ArrayStack(int n) {
         count = 0;
         array = (T[]) new Object[n];
@@ -17,7 +18,7 @@ public class ArrayStack<T> extends List {
     }
     public void push(T item) {
         if(full())
-            throw new RuntimeException("Stack is full");
+            this.duplicateSize();
         array[count]=item;
         top = item;
         count++;
@@ -37,5 +38,19 @@ public class ArrayStack<T> extends List {
         if(empty())
             throw new RuntimeException("Stack is empty");
         return top;
+    }
+    public void duplicateSize(){
+        
+        int newSize = this.size*2;
+        T[] newStack = (T[]) new Object[newSize];
+        for (int i=0; i<this.size;i++){
+            newStack[i] = (T) this.array[i];
+        }
+        this.size=newSize;
+        this.top=newStack[count];
+        this.array=newStack;    
+    }
+    public int getCount(){
+        return this.count;
     }
 }

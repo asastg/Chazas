@@ -9,7 +9,7 @@ public class User {
     private Calendar birthdate;
     private String username;
     private String password;
-    private ArrayQueueDynamic<Review>[] reviews;
+    private ArrayQueueDynamic<Review> reviews;
 
     public User(String name, String username, String password) {
         this.name = name;
@@ -49,11 +49,14 @@ public class User {
         this.password = password;
     }
 
-    public ArrayQueueDynamic<Review>[] getReviews() {
+    public ArrayQueueDynamic<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(ArrayQueueDynamic<Review>[] reviews) {
+    public void setReviews(ArrayQueueDynamic<Review> reviews) {
         this.reviews = reviews;
+    }
+    public void addReview(String description, String title, float score, Chaza chaza){
+        this.reviews.enqueue((new Review(score, chaza, this, description, title)));
     }
 }
