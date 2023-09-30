@@ -20,10 +20,10 @@ public class Admin extends User{
 
     public void registerChaza(){
        if(chazaCounter<2){ 
-           String name;
-           String foodType;
-           String location;
-           //Ingresar mock up data
+           String name = "";
+           String foodType = "";
+           String location = "";
+           //Ingresar mock up testdata
            
            this.chazasAdmin[chazaCounter]=new Chaza(name, location,foodType,this);
        }
