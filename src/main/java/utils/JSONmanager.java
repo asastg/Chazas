@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import entities.Chaza;
 import entities.Review;
+import structures.linkedLists.DoublyLinkedList;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,20 +19,32 @@ public class JSONmanager {
         return defaultObjectMapper;
     }
 
-    public static List<Review> parseReviewJSONFile(String filePath) throws IOException {
+    public static DoublyLinkedList<Review> parseReviewJSONFile(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
         List<Review> reviews = objectMapper.readValue(file, new TypeReference<List<Review>>() {});
 
-        return reviews;
+        DoublyLinkedList<Review> reviewList = new DoublyLinkedList<>();
+
+        for (Review review : reviews) {
+            reviewList.pushBack(review);
+        }
+
+        return reviewList;
     }
 
-    public static List<Chaza> parseChazaJSONFile(String filePath) throws IOException {
+    public static DoublyLinkedList<Chaza> parseChazaJSONFile(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
         List<Chaza> chazas = objectMapper.readValue(file, new TypeReference<List<Chaza>>() {});
 
-        return chazas;
+        DoublyLinkedList<Chaza> chazasList = new DoublyLinkedList<>();
+
+        for (Chaza chaza : chazas) {
+            chazasList.pushBack(chaza);
+        }
+
+        return chazasList;
     }
 
 

@@ -11,7 +11,8 @@ public class Chaza {
     private ArrayStack<Review> reviews;
     private float averageScore;
     private Admin admin;
-
+    public  Chaza(){
+    }
     public Chaza(String name, String location, String foodType, Admin admin) {
         this.name = name;
         this.location = location;
