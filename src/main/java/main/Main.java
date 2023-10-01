@@ -16,18 +16,18 @@ import static utils.JSONmanager.parseReviewJSONFile;
 public class Main {
     public static void main(String[] args) throws IOException {
         System.out.println("Proyecto time");
+        DataLogic chazaProcessing = new DataLogic();
 
-        DoublyLinkedList<Chaza> existingChazas = initializeChazas();
+        DoublyLinkedList<Chaza> existingChazas = chazaProcessing.bestToWorse(initializeChazas());
         DoublyLinkedList<ReviewData> existingReviews = initializeReviews();
 
-        DoublyLinkedList<Review> registeredChazas = new DoublyLinkedList<>();
 
         User reviewer = new User("testUser" , "user", "1234");
         Admin chacero = new Admin("testChacero", "user1", "5678");
 
-        DataLogic chazaProcessing = new DataLogic();
 
-        //chazaProcessing.printHundredBestChazas(existingChazas);
+
+        chazaProcessing.printHundredBestChazas(existingChazas);
 
         NodeD<Chaza> busqueda = chazaProcessing.FindChaza("40SwOhFUeARmwhECc3S", existingChazas);
         System.out.println("given name: 40SwOhFUeARmwhECc3S\n " + "found chaza name: "+ busqueda.getData().getName());
