@@ -2,8 +2,10 @@ package entities;
 import java.util.Scanner;
 
 public class Admin extends User{
+    
     private Chaza[] chazasAdmin;
     private int chazaCounter;
+
     public Admin(String name, String username, String password) {
         super(name, username, password);
         this.chazasAdmin = new Chaza[3];

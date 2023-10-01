@@ -80,4 +80,50 @@ public class DataLogic {
             }
         }
     }
+
+    public DoublyLinkedList<Chaza> bestToWorse(DoublyLinkedList<Chaza> chazaList){
+        //Si la lista solo tiene un elemento, se retorna la misma
+        if(chazaList.getHead() == null || chazaList.getHead().getNext() == null){
+            return chazaList;
+        }
+        //Se itera desde la cabeza de la lista
+        NodeD<Chaza> actual = chazaList.getHead();
+        while(actual != null){
+            //El nodo máximo se halla desde el nodo actual
+            NodeD<Chaza> maximo = findMax(actual);
+            //Se intercambian las posiciones de la chaza actual y la chaza con máxima calificación
+            exchange(actual, maximo);
+            //El actual ahora es el nodo siguiente, para hacer la comparación con el resto de Chazas
+            actual = actual.getNext();
+        }
+        //Al final del ciclo se retorna la lista completa ordenada
+        return chazaList;
+    }
+
+    //Encuentra una chaza con la calificación máxima
+    public NodeD<Chaza> findMax(NodeD<Chaza> inicio){
+
+        NodeD<Chaza> maximo = inicio;
+        NodeD<Chaza> actual = inicio.getNext();   
+        while(actual!=null){
+            //Si la chaza tiene una reseña con 5.0 no se busca más y se retorna esa chaza
+            if(Float.compare(actual.getData().getAverageScore(), 5.0f) == 0){
+                return actual;
+            }
+            //En caso de que la puntuacion actual sea mayor a la maxima, la calificación máxima se hará la actual
+            if(actual.getData().getAverageScore()>maximo.getData().getAverageScore()){
+                maximo = actual;
+            }
+            //Al final de cada ciclo se sigue con el siguiente nodo
+            actual = actual.getNext();
+        }
+        return maximo;
+    }
+
+    //Intercambia los valores (en este caso chazas) de un nodo a otro
+    public void exchange(NodeD<Chaza> Nchaza1, NodeD<Chaza> Nchaza2){
+        Chaza temp = Nchaza1.getData();
+        Nchaza1.setData(Nchaza2.getData());
+        Nchaza2.setData(temp);
+    }
 }
