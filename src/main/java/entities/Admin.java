@@ -6,7 +6,7 @@ public class Admin extends User{
     private int chazaCounter;
     public Admin(String name, String username, String password) {
         super(name, username, password);
-        this.chazasAdmin = new Chaza[3];
+        this.chazasAdmin = new Chaza[1000];
         this.chazaCounter=0;
     }
 
@@ -19,12 +19,12 @@ public class Admin extends User{
     }
 
     public void registerChaza(){
-       if(chazaCounter<2){ 
+       if(chazaCounter<10001){
            String name = "";
            String foodType = "";
            String location = "";
            //Ingresar mock up testdata
-           
+
            this.chazasAdmin[chazaCounter]=new Chaza(name, location,foodType,this);
        }
 

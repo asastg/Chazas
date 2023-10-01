@@ -64,18 +64,19 @@ public class DataLogic {
 
     public void printHundredBestChazas(DoublyLinkedList<Chaza> chazaList){
         if(!chazaList.empty()){
-            int counter=0;
+            int counter=1;
             boolean nextChazaNull = false;
             NodeD<Chaza> node = chazaList.getHead();
             Chaza chazaPrint = node.getData();
-            while(!nextChazaNull&&counter<100){
-                System.out.println("La chaza en el top "+counter+1+" es: "+chazaPrint.getName()+". Tipo de comida: "+ chazaPrint.getFoodType());
+            while(!nextChazaNull&&counter<101){
+                System.out.println("La chaza en el top "+counter+" es: "+chazaPrint.getName()+". Tipo de comida: "+ chazaPrint.getFoodType()+". Ches: "+chazaPrint.getAverageScore());
                 if(node.getNext()==null){
                     nextChazaNull=true;
                 }
                 else{
                     node=node.getNext();
                     chazaPrint = node.getData();
+                    counter++;
                 }
             }
         }

@@ -5,6 +5,8 @@ import entities.Chaza;
 import entities.Review;
 import entities.User;
 import structures.linkedLists.DoublyLinkedList;
+import structures.linkedLists.Node;
+import structures.linkedLists.NodeD;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,10 +21,24 @@ public class Main {
         DoublyLinkedList<Chaza> existingChazas = initializeChazas();
         DoublyLinkedList<Review> existingReviews = initializeReviews();
 
+        DoublyLinkedList<Review> registeredChazas = new DoublyLinkedList<>();
+
         User reviewer = new User("testUser" , "user", "1234");
         Admin chacero = new Admin("testChacero", "user1", "5678");
 
-        System.out.println(existingChazas.empty());
+        DataLogic chazaProcessing = new DataLogic();
+
+        Chaza mejorChaza = chazaProcessing.lookForHigherScore(existingChazas.getHead().getNext()).getData();
+
+        System.out.println("Mejor chaza: \n" + "nombre: "+mejorChaza.getName()+ " ches: "+mejorChaza.getAverageScore());
+
+        System.out.println("\n"+existingChazas.getHead().getData().getAverageScore());
+
+
+
+        System.out.println();
+
+
 
 
     }
