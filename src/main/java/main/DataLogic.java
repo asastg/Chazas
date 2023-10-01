@@ -1,4 +1,5 @@
 package main;
+import deserializationObjects.ReviewData;
 import structures.linkedLists.DoublyLinkedList;
 import structures.linkedLists.NodeD;
 import entities.Chaza;
@@ -7,22 +8,26 @@ import entities.User;
 public class DataLogic {
     
     public NodeD<Chaza> FindChaza(String chazaName, DoublyLinkedList<Chaza> chazaList){
-        if(chazaList.getHead().getData().getName()==chazaName){
+        if(chazaList.getHead().getData().getName().equals(chazaName)){
             return chazaList.getHead();
         }
+
         NodeD<Chaza> node = chazaList.getHead();
-        while(node.getNext().getData().getName()!=chazaName){
+        boolean nextChazaNull = false;
+
+        while(!node.getNext().getData().getName().equals(chazaName)){
             if(node.getNext()==null){
                 throw new RuntimeException("No se encontró una chaza con este nombre");
             }
             node = node.getNext();
         }
         return node.getNext();
+
     }
 
-    public void updateChazaScore(NodeD<Chaza> node, User currentUser, DoublyLinkedList<Chaza> chazaList){
+    public void updateChazaScore(NodeD<Chaza> node, User currentUser, DoublyLinkedList<Chaza> chazaList, ReviewData reviewData){
         float previousScore = node.getData().getAverageScore();
-        node.getData().addReview(currentUser);
+        node.getData().addReview(currentUser, reviewData);
         float newScore = node.getData().getAverageScore();
         if(previousScore<newScore){
             chazaList.popNode(node);

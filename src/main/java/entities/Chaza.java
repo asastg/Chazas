@@ -1,5 +1,7 @@
 package entities;
 
+import deserializationObjects.ReviewData;
+import structures.linkedLists.DoublyLinkedList;
 import structures.stacks.ArrayStack;
 
 
@@ -12,6 +14,7 @@ public class Chaza {
     private float averageScore;
     private Admin admin;
     public  Chaza(){
+        this.reviews = new ArrayStack<>();
     }
     public Chaza(String name, String location, String foodType, Admin admin) {
         this.name = name;
@@ -70,11 +73,10 @@ public class Chaza {
         this.averageScore = averageScore;
     }
 
-    public void addReview(User user){
-        String description = "";
-        String title = "";
-        float score=0;
-        //Lectura del mockup testdata
+    public void addReview(User user, ReviewData reviewData){
+        String description = reviewData.getDescription();
+        String title = reviewData.getTitle();
+        float score= reviewData.getScore();
 
 
         user.addReview(description, title, score, this);
@@ -84,7 +86,7 @@ public class Chaza {
     }
     
     public void udapteScore(float score){
-        this.averageScore = (this.averageScore+ score)/this.reviews.getCount();
+        this.averageScore = (this.averageScore+ score)/(this.reviews.getCount()+1);
     }
 
     
