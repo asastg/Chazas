@@ -70,10 +70,10 @@ public class Chaza {
     }
 
     public void addReview(User user){
-        String description;
-        String title;
+        String description = "";
+        String title = "";
         float score=0;
-        //Lectura del mockup data
+        //Lectura del mockup testdata
 
 
         user.addReview(description, title, score, this);
