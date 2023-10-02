@@ -41,15 +41,15 @@ public class DoublyLinkedList <T>{
     
     public void addAfter(T data, NodeD<T> node){
         NodeD<T> newNode = new NodeD<T>(data);
-        newNode.setNext(node.getNext());
-        newNode.setPrevious(node);
-        node.setNext(newNode);
-        if(node==this.tail){
+        if(node.getNext()==null){
             this.tail=newNode;
         }
         else{
             node.getNext().setPrevious(newNode);
-        }   
+        }
+        newNode.setNext(node.getNext());
+        newNode.setPrevious(node);
+        node.setNext(newNode);
     }
 
     public NodeD<T> getHead(){
@@ -62,15 +62,15 @@ public class DoublyLinkedList <T>{
 
     public void addBefore(T data, NodeD<T> node){
         NodeD<T> newNode = new NodeD<T>(data);
-        newNode.setPrevious(node.getPrevious());
-        newNode.setNext(node);
-        node.setPrevious(newNode);
-        if(node==this.head){
+        if(node.getPrevious()==null){
             this.head=newNode;
         }
         else{
             node.getPrevious().setNext(newNode);
         }
+        newNode.setPrevious(node.getPrevious());
+        newNode.setNext(node);
+        node.setPrevious(newNode);
     }
 
     public void popNode(NodeD<T> node){
@@ -83,15 +83,15 @@ public class DoublyLinkedList <T>{
            node.getNext().setPrevious(node.getPrevious());
            tail=false;
         }
-        popHeadAndTail(tail, head);
+        popHeadAndTail(tail, head, node);
     }
 
-    public void popHeadAndTail(boolean tail, boolean head){
+    public void popHeadAndTail(boolean tail, boolean head, NodeD<T> node){
         if(tail){
-           this.tail=null;
+           this.tail=node.getPrevious();
         }
         if(head){
-            this.head=null;
+            this.head=node.getNext();
         }
     }
 

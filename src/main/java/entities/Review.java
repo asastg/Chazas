@@ -10,6 +10,9 @@ public class Review {
     private Chaza chaza;
     private User autor;
 
+    public Review(){
+    }
+
     public Review(float score, Chaza chaza, User autor) {
         this.date = Calendar.getInstance();
         this.score = score;
