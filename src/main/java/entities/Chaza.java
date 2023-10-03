@@ -74,8 +74,10 @@ public class Chaza {
     }
 
     public void addReview(User user, ReviewData reviewData){
-        String description = reviewData.getDescription();
-        String title = reviewData.getTitle();
+//        String description = reviewData.getDescription();
+//        String title = reviewData.getTitle();
+        String description = "";
+        String title = "";
         float score= reviewData.getScore();
 
 
