@@ -126,4 +126,61 @@ public class DataLogic {
         Nchaza1.setData(Nchaza2.getData());
         Nchaza2.setData(temp);
     }
+//--------------------------Float---------------------------------------------------//
+    public void exchangeFloat(NodeD<Float> numero1, NodeD<Float> numero2){
+        Float temp = numero1.getData();
+        numero1.setData(numero2.getData());
+        numero2.setData(temp);
+    }
+
+    public NodeD<Float> findMaxFloat(NodeD<Float> inicio){
+
+        NodeD<Float> maximo = inicio;
+        NodeD<Float> actual = inicio.getNext();   
+        while(actual!=null){
+            //En caso de que la puntuacion actual sea mayor a la maxima, la calificación máxima se hará la actual
+            if(actual.getData()>maximo.getData()){
+                maximo = actual;
+            }
+            //Al final de cada ciclo se sigue con el siguiente nodo
+            actual = actual.getNext();
+        }
+        return maximo;
+    }
+
+    public DoublyLinkedList<Float> bestToWorseFloat(DoublyLinkedList<Float> floatList){
+        //Si la lista solo tiene un elemento, se retorna la misma
+        if(floatList.getHead() == null || floatList.getHead().getNext() == null){
+            return floatList;
+        }
+        //Se itera desde la cabeza de la lista
+        NodeD<Float> actual = floatList.getHead();
+        while(actual != null){
+            //El nodo máximo se halla desde el nodo actual
+            NodeD<Float> maximo = findMaxFloat(actual);
+            //Se intercambian las posiciones de la chaza actual y la chaza con máxima calificación
+            exchangeFloat(actual, maximo);
+            //El actual ahora es el nodo siguiente, para hacer la comparación con el resto de Chazas
+            actual = actual.getNext();
+        }
+        //Al final del ciclo se retorna la lista completa ordenada
+        return floatList;
+    }
+    //Float organizar chazas maximo a minimo (todo arriba)
+
+    public NodeD<Float> FindFloat(float number, DoublyLinkedList<Float> floatList){
+        if(floatList.getHead().getData()==number){
+            return floatList.getHead();
+        }
+        NodeD<Float> node = floatList.getHead();
+        while(node.getNext().getData()!=number){
+            if(node.getNext()==null){
+                throw new RuntimeException("No se encontró una chaza con este nombre");
+            }
+            node = node.getNext();
+        }
+        return node.getNext();
+    } 
+
 }
+
