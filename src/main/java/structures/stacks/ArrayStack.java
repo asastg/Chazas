@@ -2,6 +2,7 @@ package structures.stacks;
 
 import structures.List;
 
+@SuppressWarnings("unchecked")
 public class ArrayStack<T> extends List {
     private static final int fixed = 3;
     private T top;
@@ -23,16 +24,21 @@ public class ArrayStack<T> extends List {
         top = item;
         count++;
     }
-    public void pop() {
+    public T pop() {
+        T element;
         if(empty())
             throw new RuntimeException("Stack is empty");
         if(count ==1){
             top = null;
-        } else {
-            top = (T) array[count -2];
+            return top;
+        } 
+        else{
+            element=top;
+            top = (T) array[count - 2];
         }
         array[count -1]=null;
         count--;
+        return element;
     }
     public T peek() {
         if(empty())

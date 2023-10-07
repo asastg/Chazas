@@ -1,6 +1,8 @@
 package main;
 import structures.linkedLists.DoublyLinkedList;
 import structures.linkedLists.NodeD;
+import structures.stacks.Stack;
+import structures.stacks.ArrayStack;
 import entities.Chaza;
 import entities.User;
 
@@ -182,5 +184,20 @@ public class DataLogic {
         return node.getNext();
     } 
 
+    public static ArrayStack<Float> StackBestWorse(ArrayStack<Float> stack) {
+        ArrayStack<Float> tempStack = new ArrayStack<>();
+        while (!stack.empty()) {
+            float temp = stack.pop();
+            //Mientras que el stack no esté vacio se compara el peek del stacktemporal con
+            //el ultimo elemento popeado de stack, si es mayor el elemento del stack, se popea el ultimo del 
+            //stacktemporal y se coloca nuevamente en el stack desordenado
+            //el ciclo termina colocando el elemento temporal en el stacktemporal
+            while (!tempStack.empty() && tempStack.peek() < temp) {
+                stack.push(tempStack.pop());
+            }
+            tempStack.push(temp);
+        }
+        return tempStack;
+    }
 }
 
