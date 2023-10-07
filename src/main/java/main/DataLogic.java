@@ -122,6 +122,22 @@ public class DataLogic {
         return maximo;
     }
 
+    public static ArrayStack<Chaza> BestWorse(ArrayStack<Chaza> stack) {
+        ArrayStack<Chaza> tempStack = new ArrayStack<>();
+        while (!stack.empty()) {
+            Chaza temp = stack.pop();
+            //Mientras que el stack no esté vacio se compara el peek del stacktemporal con
+            //el ultimo elemento popeado de stack, si es mayor el elemento del stack, se popea el ultimo del 
+            //stacktemporal y se coloca nuevamente en el stack desordenado
+            //el ciclo termina colocando el elemento temporal en el stacktemporal
+            while (!tempStack.empty() && tempStack.peek().getAverageScore() < temp.getAverageScore()) {
+                stack.push(tempStack.pop());
+            }
+            tempStack.push(temp);
+        }
+        return tempStack;
+    }
+
     //Intercambia los valores (en este caso chazas) de un nodo a otro
     public void exchange(NodeD<Chaza> Nchaza1, NodeD<Chaza> Nchaza2){
         Chaza temp = Nchaza1.getData();
