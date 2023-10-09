@@ -75,11 +75,11 @@ public class DoublyLinkedList <T>{
 
     public void popNode(NodeD<T> node){
         boolean head=true, tail=true;
-        if(node!=this.head){
+        if(node.getPrevious()!=null){
            node.getPrevious().setNext(node.getNext());
            head=false;
         }
-        if(node!=this.tail){
+        if(node.getNext()!=null){
            node.getNext().setPrevious(node.getPrevious());
            tail=false;
         }
