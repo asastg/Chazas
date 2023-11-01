@@ -2,8 +2,10 @@ package utils;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
+import deserializationObjects.ReviewData;
 import entities.Chaza;
 import entities.Review;
+import structures.linkedLists.DoublyLinkedList;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,20 +20,63 @@ public class JSONmanager {
         return defaultObjectMapper;
     }
 
-    public static List<Review> parseReviewJSONFile(String filePath) throws IOException {
+    public static DoublyLinkedList<ReviewData> parseReviewJSONFile(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
-        List<Review> reviews = objectMapper.readValue(file, new TypeReference<List<Review>>() {});
+        List<ReviewData> reviews = objectMapper.readValue(file, new TypeReference<List<ReviewData>>() {});
 
-        return reviews;
+        DoublyLinkedList<ReviewData> reviewList = new DoublyLinkedList<>();
+
+        for (ReviewData review : reviews) {
+            reviewList.pushBack(review);
+        }
+
+        return reviewList;
     }
 
-    public static List<Chaza> parseChazaJSONFile(String filePath) throws IOException {
+    public static ReviewData[] parseReviewJSONFileArray(String filePath) throws IOException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File(filePath);
+        List<ReviewData> reviews = objectMapper.readValue(file, new TypeReference<List<ReviewData>>(){});
+        int size = reviews.size();
+        ReviewData [] ReviewArray = new ReviewData[size];
+        int counter=0;
+        for (ReviewData review : reviews){
+            ReviewArray[counter]=review;
+            counter+=1;
+        }
+
+        return ReviewArray;
+
+    }
+
+    public static Chaza[] parseChazaJSONFileArray(String filePath) throws IOException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File(filePath);
+        List<Chaza> chazas = objectMapper.readValue(file, new TypeReference<List<Chaza>>() {});
+        int size = chazas.size();
+        Chaza [] ChazaArray = new Chaza[size];
+        int counter =0;
+        for (Chaza chaza : chazas){
+            ChazaArray[counter]=chaza;
+            counter+=1;
+        }
+        return ChazaArray;
+    }
+
+    public static DoublyLinkedList<Chaza> parseChazaJSONFile(String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         File file = new File(filePath);
         List<Chaza> chazas = objectMapper.readValue(file, new TypeReference<List<Chaza>>() {});
 
-        return chazas;
+        DoublyLinkedList<Chaza> chazasList = new DoublyLinkedList<>();
+
+        for (Chaza chaza : chazas) {
+            chazasList.pushBack(chaza);
+        }
+
+        return chazasList;
+
     }
 
 

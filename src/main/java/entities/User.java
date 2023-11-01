@@ -15,6 +15,7 @@ public class User {
         this.name = name;
         this.username = username;
         this.password = password;
+        this.reviews = new ArrayQueueDynamic<>();
     }
 
     public String getName() {
