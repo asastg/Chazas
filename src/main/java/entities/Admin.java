@@ -21,11 +21,12 @@ public class Admin extends User{
     }
 
     public void registerChaza(){
+
        if(chazaCounter<10001){
+
            String name = "";
            String foodType = "";
            String location = "";
-           //Ingresar mock up testdata
 
            this.chazasAdmin[chazaCounter]=new Chaza(name, location,foodType,this);
        }

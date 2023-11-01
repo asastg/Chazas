@@ -73,12 +73,14 @@ public class Chaza {
         this.averageScore = averageScore;
     }
 
+
     public void addReview(User user, ReviewData reviewData){
 //        String description = reviewData.getDescription();
 //        String title = reviewData.getTitle();
         String description = "";
         String title = "";
         float score= reviewData.getScore();
+
 
 
         user.addReview(description, title, score, this);
