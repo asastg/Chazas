@@ -1,8 +1,7 @@
 package entities;
 
 import deserializationObjects.ReviewData;
-import structures.linkedLists.DoublyLinkedList;
-import structures.stacks.ArrayStack;
+import structures.lineales.linkedLists.stacks.ArrayStack;
 
 
 

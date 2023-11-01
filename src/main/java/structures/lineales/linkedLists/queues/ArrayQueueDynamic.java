@@ -1,5 +1,5 @@
-package structures.queues;
-import structures.List;
+package structures.lineales.linkedLists.queues;
+import structures.lineales.linkedLists.List;
 
 public class ArrayQueueDynamic<T> extends List  {
     private static final int DEFAULT_SIZE = 3;

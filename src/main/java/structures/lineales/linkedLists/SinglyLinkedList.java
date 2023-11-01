@@ -1,4 +1,4 @@
-package structures.linkedLists;
+package structures.lineales.linkedLists;
 
 public class SinglyLinkedList<T> {
     private Node<T> head, tail;

@@ -1,17 +1,14 @@
 package main;
 
 import deserializationObjects.ReviewData;
-import entities.Admin;
 import entities.Chaza;
-import entities.Review;
 import entities.User;
-import structures.linkedLists.DoublyLinkedList;
-import structures.linkedLists.NodeD;
+import structures.lineales.linkedLists.DoublyLinkedList;
+import structures.lineales.linkedLists.NodeD;
 
 
 import java.io.IOException;
 import java.util.Random;
-import java.util.Scanner;
 
 
 import static utils.JSONmanager.parseChazaJSONFile;

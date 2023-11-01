@@ -1,4 +1,4 @@
-package structures.linkedLists;
+package structures.lineales.linkedLists;
 
 public class DoublyLinkedList <T>{
     NodeD<T> head, tail;

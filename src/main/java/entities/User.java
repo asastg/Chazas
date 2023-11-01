@@ -1,6 +1,6 @@
 package entities;
 
-import structures.queues.ArrayQueueDynamic;
+import structures.lineales.linkedLists.queues.ArrayQueueDynamic;
 
 import java.util.Calendar;
 

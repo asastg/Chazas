@@ -1,6 +1,6 @@
-package structures.stacks;
+package structures.lineales.linkedLists.stacks;
 
-import structures.List;
+import structures.lineales.linkedLists.List;
 
 public class ArrayStack<T> extends List {
     private static final int fixed = 3;

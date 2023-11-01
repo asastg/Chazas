@@ -4,8 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import deserializationObjects.ReviewData;
 import entities.Chaza;
-import entities.Review;
-import structures.linkedLists.DoublyLinkedList;
+import structures.lineales.linkedLists.DoublyLinkedList;
 
 import java.io.File;
 import java.io.IOException;

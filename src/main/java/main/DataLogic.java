@@ -1,7 +1,7 @@
 package main;
 import deserializationObjects.ReviewData;
-import structures.linkedLists.DoublyLinkedList;
-import structures.linkedLists.NodeD;
+import structures.lineales.linkedLists.DoublyLinkedList;
+import structures.lineales.linkedLists.NodeD;
 import entities.Chaza;
 import entities.User;
 

@@ -1,4 +1,4 @@
-package structures;
+package structures.lineales.linkedLists;
 
 public class List<T> {
     protected int size, count;

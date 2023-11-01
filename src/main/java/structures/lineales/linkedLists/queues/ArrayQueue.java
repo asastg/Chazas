@@ -1,5 +1,5 @@
-package structures.queues;
-import structures.List;
+package structures.lineales.linkedLists.queues;
+import structures.lineales.linkedLists.List;
 
 public class ArrayQueue<T> extends List {
     private static final int fixed = 3;
