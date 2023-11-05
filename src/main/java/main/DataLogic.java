@@ -1,7 +1,13 @@
 package main;
 import deserializationObjects.ReviewData;
+import structures.arboles.BinarySearchTree;
 import structures.lineales.linkedLists.DoublyLinkedList;
 import structures.lineales.linkedLists.NodeD;
+import structures.arboles.BSTnode;
+import structures.arboles.BinarySearchTree;
+import structures.arboles.BinarySearchTreeString;
+import structures.arboles.NodeString;
+
 import entities.Chaza;
 import entities.User;
 
@@ -61,7 +67,7 @@ public class DataLogic {
         }
     }
 
-    public void udapteChazaScore(int index, User currentUser, Chaza[] chazas, ReviewData reviewData){
+    public void updateChazaScore(int index, User currentUser, Chaza[] chazas, ReviewData reviewData){
         float previousScore = chazas[index].getAverageScore();
         chazas[index].addReview(currentUser, reviewData);
         float newScore = chazas[index].getAverageScore();
@@ -238,6 +244,12 @@ public class DataLogic {
             }
 
         }
+    }
+
+    public void updateChazaScore(NodeString node, User currentUser, BinarySearchTree scoreTree, BinarySearchTreeString nameTree, ReviewData reviewData){
+        node.getData().addReview(currentUser, reviewData);
+        scoreTree.delete(node.getPointer());
+        node.setPointer(scoreTree.insert(node.getData()));
     }
 
 }

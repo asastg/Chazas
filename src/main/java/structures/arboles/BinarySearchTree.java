@@ -1,59 +1,41 @@
 package structures.arboles;
 
-public class BinarySearchTree<T extends Comparable<T>> {
-    private BSTnode<T> root;
+import entities.Chaza;
+
+public class BinarySearchTree  {
+    private BSTnode root;
     private int size =0;
 
     public BinarySearchTree() {
         this.root = null;
     }
 
-    public BSTnode<T> getRoot(){
+    public BSTnode getRoot(){
         return root;
     }
 
-    public void setRoot(BSTnode<T> root) {
+    public void setRoot(BSTnode root) {
         this.root = root;
     }
 
-    public BSTnode insert(BSTnode node, T key) {
-        // If the tree is empty, return a new node
-        if (node == null) {
-            node = new BSTnode<>(key);
-            return node;
-        }
-
-        // Otherwise, recur down the tree
-        if (key.compareTo((T) node.getData()) < 0)
-            node.setLeft(insert(node.getLeft(), key));
-        else if (key.compareTo((T) node.getData()) > 0)
-            node.setRight(insert(node.getRight(), key));
-
-        // Return the (unchanged) node pointer
-        return node;
-    }
-
-    BSTnode search(BSTnode root, T key) {
-        // Base Cases: root is null or key is present at root
-        if (root == null || root.getData() == key)
+    public BSTnode insert(Chaza key) {
+        if (this.root==null){
+            this.root = new BSTnode(key, null);
             return root;
-
-        // Key is greater than root's key
-        if (key.compareTo((T) root.getData()) > 0)
-            return search(root.getRight(), key);
-
-        // Key is smaller than root's key
-        return search(root.getLeft(), key);
+        }
+        else{
+            return this.root.insertar(key);
+        }
     }
 
-    public BSTnode<T> find(T key, BSTnode<T> root) {
+    public BSTnode find(float key, BSTnode root) {
         if (root == null) {
             return null; // Key not found in the tree
         }
-        if (key.compareTo(root.getData()) == 0) {
+        if (key == root.getData().getAverageScore()) {
             return root; // Key found at the current node
         }
-        if (key.compareTo(root.getData()) < 0) {
+        if (key < root.getData().getAverageScore()) {
             if (root.getLeft() != null) {
                 return find(key, root.getLeft());
             } else {
@@ -64,7 +46,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public BSTnode<T> next(BSTnode<T> node) {
+    public BSTnode next(BSTnode node) {
         if (node.getRight() != null) {
             return leftDescendant(node.getRight());
         } else {
@@ -72,7 +54,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    private BSTnode<T> leftDescendant(BSTnode<T> node) {
+    private BSTnode leftDescendant(BSTnode node) {
         if (node.getLeft() == null) {
             return node;
         } else {
@@ -80,28 +62,27 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    private BSTnode<T> rightAncestor(BSTnode<T> node) {
+    private BSTnode rightAncestor(BSTnode node) {
         if (node.getParent() == null) {
             return null; // node is the root, and there is no right ancestor
         }
 
-        if (node.getData().compareTo(node.getParent().getData()) < 0) {
+        if (node.getData().getAverageScore() < node.getParent().getData().getAverageScore())  {
             return node.getParent();
         } else {
             return rightAncestor(node.getParent());
         }
     }
 
-    public BSTnode<T>[] rangeSearch(T x, T y, BSTnode<T> root) {
-        BSTnode<T>[] result = (BSTnode<T>[]) new BSTnode[1]; // Initialize with an array of size 1
+    public BSTnode[] rangeSearch(float min, float max, BSTnode root) {
+        BSTnode[] result = new BSTnode[1]; // Initialize with an array of size 1
         int count = 0;
 
-        BSTnode<T> node = find(x, root);
+        BSTnode node = find(min, root);
 
-        while (node != null && node.getData().compareTo(y) <= 0) {
-            if (node.getData().compareTo(x) >= 0) {
+        while (node != null && node.getData().getAverageScore() <= max) {
+            if (node.getData().getAverageScore() >= min) {
                 if (count >= result.length) {
-                    // If the result array is full, double its size
                     result = resizeArray(result, result.length * 2);
                 }
                 result[count++] = node;
@@ -109,13 +90,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
             node = next(node);
         }
 
-        // Resize the result array to fit the actual number of elements
+        
+
         result = resizeArray(result, count);
 
         return result;
     }
 
-    public void delete(BSTnode<T> N) {
+    public void delete(BSTnode N) {
         if (N == null) {
             return; // Node is null, nothing to delete
         }
@@ -125,7 +107,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
             promote(N, N.getLeft());
         } else {
             // Node N has a right child, find the next node (X)
-            BSTnode<T> X = next(N);
+            BSTnode X = next(N);
 
             if (X.getLeft() == null) {
                 // X has no left child, simply replace N with X
@@ -139,14 +121,14 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public int getTreeSizeFromNode(BSTnode<T> node){
+    public int getTreeSizeFromNode(BSTnode node){
         if (node == null) {
             return 0;
         }
         return 1 + getTreeSizeFromNode(node.getLeft()) + getTreeSizeFromNode(node.getRight());
     }
 
-    public void promote(BSTnode<T> oldNode, BSTnode<T> newNode) {
+    public void promote(BSTnode oldNode, BSTnode newNode) {
         if (oldNode.getParent() == null) {
             // oldNode is the root node, update the root to newNode
             root = newNode;
@@ -154,7 +136,7 @@ public class BinarySearchTree<T extends Comparable<T>> {
                 newNode.setParent(null);
             }
         } else {
-            BSTnode<T> parent = oldNode.getParent();
+            BSTnode parent = oldNode.getParent();
             if (parent.getLeft() == oldNode) {
                 parent.setLeft(newNode);
             } else {
@@ -167,8 +149,8 @@ public class BinarySearchTree<T extends Comparable<T>> {
         }
     }
 
-    public void replace(BSTnode<T> oldNode, BSTnode<T> newNode) {
-        BSTnode<T> parent = oldNode.getParent();
+    public void replace(BSTnode oldNode, BSTnode newNode) {
+        BSTnode parent = oldNode.getParent();
 
         if (parent == null) {
             // oldNode is the root node
@@ -194,9 +176,44 @@ public class BinarySearchTree<T extends Comparable<T>> {
         oldNode.setRight(null);
     }
 
-    private BSTnode<T>[] resizeArray(BSTnode<T>[] array, int newSize) {
-        BSTnode<T>[] newArray = (BSTnode<T>[]) new BSTnode[newSize];
+    private BSTnode[] resizeArray(BSTnode[] array, int newSize) {
+        BSTnode[] newArray = (BSTnode[]) new BSTnode[newSize];
         System.arraycopy(array, 0, newArray, 0, Math.min(array.length, newSize));
         return newArray;
+    }
+
+    public BSTnode getMax(){
+        if(root==null||root.getRight()==null){
+            return root;
+        }
+        return root.getMax();
+    }
+
+    public BSTnode previous(BSTnode node){
+        if (node.getLeft() != null){
+            return rightDescendant(node.getLeft());
+        }
+        else{
+            return leftAncestor(node);
+        }
+    }
+    
+    public BSTnode rightDescendant(BSTnode node){
+        if(node.getRight()==null){
+            return node;
+        }
+        return rightDescendant(node.getRight());
+    }
+
+    public BSTnode leftAncestor(BSTnode node){
+        if (node.getParent() == null) {
+            return null; 
+        }
+
+        if (node == node.getParent().getRight()) {
+            return node.getParent();
+        } else {
+            return leftAncestor(node.getParent());
+        }
     }
 }
