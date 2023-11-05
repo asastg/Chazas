@@ -75,13 +75,13 @@ public class Main {
         }
         Random randomGeneretor = new Random();
         String[] nameOfDifferentChazas = new String[100];
-        for(int i=0; i<100; i++){
+        for(int i=0; i<numberOfChazas/10; i++){
             int randomInteger = randomGeneretor.nextInt(999);
             nameOfDifferentChazas[i]=existingChazasArray[randomInteger].getName();
         }
         
         //Ciclo para buscar Chazas
-        for(int i=0; i<100; i++){
+        for(int i=0; i<numberOfChazas/10; i++){
             nameTree.find(nameOfDifferentChazas[i], nameTree.getRoot());
         }
      
