@@ -1,4 +1,5 @@
 package main;
+import java.util.ArrayList;
 import deserializationObjects.ReviewData;
 import structures.arboles.BinarySearchTree;
 import structures.lineales.linkedLists.DoublyLinkedList;
@@ -252,4 +253,34 @@ public class DataLogic {
         node.setPointer(scoreTree.insert(node.getData()));
     }
 
+    public ArrayList<Chaza> searchByRating(BSTnode node, int targetRating) {
+        ArrayList<Chaza> result = new ArrayList<>();
+        searchByRating(node, targetRating, result);
+        return result;
+    }
+
+    private void searchByRating(BSTnode node, int targetRating, ArrayList<Chaza> result) {
+        if (node != null) {
+            if (node.getData().getAverageScore() == targetRating){
+                result.add(node.getData());
+            }
+            if (targetRating <= node.getData().getAverageScore()){
+                searchByRating(node.getLeft(), targetRating, result);
+            }
+            else if (targetRating >= node.getData().getAverageScore()){
+                searchByRating(node.getRight(), targetRating, result);
+            }
+            else{
+                // Si la calificación del nodo actual coincide, busca en ambas ramas
+                searchByRating(node.getLeft(), targetRating, result);
+                searchByRating(node.getRight(), targetRating, result);
+            }
+        }
+    }
+    // int targetRating = 4;
+    // ArrayList<Chaza> result = searchByRating(root, targetRating); //Es necesario tener el root del arbol
+    // for (Chaza chaza : result) {
+    //     System.out.println(chaza.name + " - Calificación: " + chaza.rating);
+    // }
+    
 }
