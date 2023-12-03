@@ -36,7 +36,7 @@ public class Main {
         BinarySearchTree scoreTree = new BinarySearchTree();
         
         //elegir un primo con relativa cercania para la cantidad de datos.
-        Hash hash = new Hash(641);
+        Hash hash = new Hash(977);
 
 
         Chaza[] existingChazasArray = initializeChazaArray();
@@ -105,7 +105,7 @@ public class Main {
         long addReviewsFinish = System.currentTimeMillis();
         System.out.println(" Tiempo de añadir 10 reviews a "+ numberOfChazas+" en hashes es: "+ (addReviewsFinish-addReviewsStart));
         
-
+        
         
 
 
@@ -165,5 +165,35 @@ public class Main {
         String filePath = "src/main/java/testdata/chazasData/Chazas1K.json";
         return parseChazaJSONFileArray(filePath);
     }
+
+    public ArrayList<Chaza> searchByRating(BSTnode node, int targetRating) {
+        ArrayList<Chaza> result = new ArrayList<>();
+        searchByRating(node, targetRating, result);
+        return result;
+    }
+
+    private void searchByRating(BSTnode node, int targetRating, ArrayList<Chaza> result) {
+        if (node != null) {
+            if (node.getData().getAverageScore() == targetRating){
+                result.add(node.getData());
+            }
+            if (targetRating <= node.getData().getAverageScore()){
+                searchByRating(node.getLeft(), targetRating, result);
+            }
+            else if (targetRating >= node.getData().getAverageScore()){
+                searchByRating(node.getRight(), targetRating, result);
+            }
+            else{
+                // Si la calificación del nodo actual coincide, busca en ambas ramas
+                searchByRating(node.getLeft(), targetRating, result);
+                searchByRating(node.getRight(), targetRating, result);
+            }
+        }
+    }
+    // int targetRating = 4;
+    // ArrayList<Chaza> result = searchByRating(root, targetRating); //Es necesario tener el root del arbol
+    // for (Chaza chaza : result) {
+    //     System.out.println(chaza.name + " - Calificación: " + chaza.rating);
+    // }
 }
 
