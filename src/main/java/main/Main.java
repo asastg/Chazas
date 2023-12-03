@@ -17,6 +17,9 @@ import structures.arboles.BSTnode;
 import structures.arboles.BinarySearchTree;
 import structures.arboles.BinarySearchTreeString;
 import structures.arboles.NodeString;
+import structures.arboles.Hash;
+import structures.arboles.HashData;
+import structures.arboles.HashNode;
 
 
 public class Main {
@@ -31,21 +34,26 @@ public class Main {
         Collections.shuffle(integerList);
 
         BinarySearchTree scoreTree = new BinarySearchTree();
-        BinarySearchTreeString nameTree = new BinarySearchTreeString();
+        
+        //elegir un primo con relativa cercania para la cantidad de datos.
+        Hash hash = new Hash(641);
+
 
         Chaza[] existingChazasArray = initializeChazaArray();
         ReviewData[] existingReviewsArray = initializeReviewsArray();        
-        DoublyLinkedList<Chaza> existingChazas = chazaProcessing.bestToWorse(initializeChazas());
-        DoublyLinkedList<ReviewData> existingReviews = initializeReviews();
+        //DoublyLinkedList<Chaza> existingChazas = chazaProcessing.bestToWorse(initializeChazas());
+        //DoublyLinkedList<ReviewData> existingReviews = initializeReviews();
 
         //chazaProcessing.organizeChazaArray(existingChazasArray);
         
-        //chazaProcessing.printHundredBestChazas(existingChazasArray);
+        long organizeHashStart = System.currentTimeMillis();
+        
         for(Integer integer : integerList){
-            nameTree.insert(existingChazasArray[integer], scoreTree.insert(existingChazasArray[integer]));
+            hash.hashChaza(existingChazasArray[integer], scoreTree.insert(existingChazasArray[integer]));
         }
+        long organizeHashFinish = System.currentTimeMillis();
 
-        System.out.println();
+        System.out.println(" El tiempo de organizar "+numberOfChazas+" en hashes es: "+(organizeHashFinish-organizeHashStart)+" Con colisiones= "+hash.getCollisions());
 
         // Esta parte imprime las chazas por orden descendente según su puntaje
         BSTnode node = scoreTree.getMax();
@@ -57,15 +65,8 @@ public class Main {
             System.out.println("Chaza top: "+ (k+2) +": "+chazaImprimir.getName()+" puntaje: "+chazaImprimir.getAverageScore());
         }
         User[] reviewUsers = new User[100];
-        // Esta parte imprime las chazas por orden descendente según su nombre
-        NodeString nodeM = nameTree.getMax();
-        Chaza chazaImprimirNombre = nameTree.getMax().getData();
-        System.out.println("Chaza top 1: "+ chazaImprimirNombre.getName()+" puntaje: "+ chazaImprimirNombre.getAverageScore());
-        for(int k=0; k<10; k++){
-            nodeM = nameTree.previous(nodeM);
-            chazaImprimirNombre = nodeM.getData();
-            System.out.println("Chaza top: "+ (k+2)+": "+chazaImprimirNombre.getName()+" puntaje: "+chazaImprimirNombre.getAverageScore());
-        }
+        
+        
         // Acá se prepara todo para hacer la prueba de añadir reviews
         for(int i=0; i<100; i++){
             String name = "Usuario de nombre"+i;
@@ -79,20 +80,30 @@ public class Main {
             int randomInteger = randomGeneretor.nextInt(999);
             nameOfDifferentChazas[i]=existingChazasArray[randomInteger].getName();
         }
-        
+        HashNode hashnode;
+        int number=0;
         //Ciclo para buscar Chazas
+        long searchStart = System.currentTimeMillis();
         for(int i=0; i<numberOfChazas/10; i++){
-            nameTree.find(nameOfDifferentChazas[i], nameTree.getRoot());
-        }
-     
-        //Se añaden las reviews a las chazas
-        
-        for (int j= 0; j<numberOfChazas/10; j++){
-            int randomNumber = randomGeneretor.nextInt(99);
-            for(int k=0; k<10;k++){
-                chazaProcessing.updateChazaScore(nameTree.find(nameOfDifferentChazas[j], nameTree.getRoot()),reviewUsers[randomNumber], scoreTree, nameTree, existingReviewsArray[(j*10)+k]);
+            hashnode = hash.findChaza(nameOfDifferentChazas[i]);
+            if(hashnode==null){
+               number++;
             }
         }
+        long searchFinish = System.currentTimeMillis();
+        System.out.println(" Tiempo de buscar "+numberOfChazas+" en hashes es: "+(searchFinish-searchStart)+" nodos nulos "+ number);    
+        //Se añaden las reviews a las chazas
+        
+        long addReviewsStart = System.currentTimeMillis();
+        for (int j=0; j<numberOfChazas/10; j++){
+            int randomNumber = randomGeneretor.nextInt(99);
+            for(int k=0; k<10;k++){
+                HashNode nodeHash = hash.findChaza(nameOfDifferentChazas[j]);
+                chazaProcessing.updateChazaScore(nodeHash,reviewUsers[randomNumber], scoreTree, existingReviewsArray[j*10+k]);
+            }
+        }
+        long addReviewsFinish = System.currentTimeMillis();
+        System.out.println(" Tiempo de añadir 10 reviews a "+ numberOfChazas+" en hashes es: "+ (addReviewsFinish-addReviewsStart));
         
 
         

@@ -7,6 +7,7 @@ import structures.arboles.BSTnode;
 import structures.arboles.BinarySearchTree;
 import structures.arboles.BinarySearchTreeString;
 import structures.arboles.NodeString;
+import structures.arboles.HashNode;
 
 import entities.Chaza;
 import entities.User;
@@ -250,6 +251,12 @@ public class DataLogic {
         node.getData().addReview(currentUser, reviewData);
         scoreTree.delete(node.getPointer());
         node.setPointer(scoreTree.insert(node.getData()));
+    }
+
+    public void updateChazaScore(HashNode node, User currentUser, BinarySearchTree scoreTree, ReviewData reviewData){
+        node.getData().addReview(currentUser, reviewData);
+        scoreTree.delete(node.getNode());
+        node.setNode(scoreTree.insert(node.getData()));
     }
 
 }
